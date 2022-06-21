@@ -24,8 +24,8 @@
       <tr *ngFor="let item of items">
         <th scope="row">
           <div class="p-2">
-            <img src="{{item.pictureUrl||item.itmeOrdered.pictureUrl}}" alt="{{item.productName||item.itmeOrdered.productName}}" class="img-fluid"
-                 style="max-height: 50px;">
+            <img *ngIf="item.id>0" src="{{picBaseUrl+item.pictureUrl}}" alt="{{item.productName}}" class="img-fluid" style="max-height: 50px;">
+            <img *ngIf="item.id==0" src="{{picBaseUrl+item.itmeOrdered.pictureUrl}}" alt="{{item.itmeOrdered.pictureUrl}}" class="img-fluid" style="max-height: 50px;">
             <div class="ml-3 d-inline-block align-middle">
               <h5 class="mb-0">
                 <a *ngIf="item.id>0" routerLink="/shop/{{item.id}}" class="text-dark">{{item.productName}}</a>

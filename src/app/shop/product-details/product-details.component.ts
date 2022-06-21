@@ -4,6 +4,7 @@ import {ShopService} from "../shop.service";
 import {ActivatedRoute} from "@angular/router";
 import {BreadcrumbService} from "xng-breadcrumb";
 import {BasketService} from "../../basket/basket.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -13,6 +14,7 @@ import {BasketService} from "../../basket/basket.service";
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
   quantity = 1;
+  picBaseUrl: string;
 
   constructor(private shopService: ShopService, private activateRoute: ActivatedRoute,
               private bcService: BreadcrumbService, private basketService: BasketService) {
@@ -20,6 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.picBaseUrl=environment.picBaseUrl;
     this.loadProduct();
   }
   addItemToBasket() {

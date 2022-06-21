@@ -3,6 +3,7 @@ import {BasketService} from "../../basket/basket.service";
 import {Observable} from "rxjs";
 import {IBasket, IBasketItem} from "../models/basket";
 import {IOrderItem} from "../models/order";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-basket-summary',
@@ -16,12 +17,14 @@ export class BasketSummaryComponent implements OnInit {
   @Input() isBasket = true;
   @Input() items: IBasketItem[] | IOrderItem[] = [];
   @Input() isOrder = false;
+  picBaseUrl: string;
 
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.picBaseUrl=environment.picBaseUrl;
   }
 
   decrementItemQuantity(item: IBasketItem) {
