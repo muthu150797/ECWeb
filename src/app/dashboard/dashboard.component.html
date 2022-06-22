@@ -8,18 +8,18 @@
               <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                   <li class="nav-item">
                       <a href="#" class="nav-link align-middle px-0">
-                          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none text-primary d-sm-inline">Home</span>
+                          <i class="fs-4 bi-house text-primary"></i> <span class="ms-1 d-none text-primary d-sm-inline">Home</span>
                       </a>
                   </li>
                   <li>
                       <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                          <i class="fs-4 bi bi-gear text-primary"></i> <span class="ms-1 d-none d-sm-inline text-primary">Manage Products</span> </a>
                       <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                           <li class="w-100">
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                              <a routerLink="brands" class="nav-link px-0 text-primary"> <span class="d-none d-sm-inline">Brands</span>  </a>
                           </li>
                           <li>
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                              <a routerLink="productTypes" class="nav-link px-0 text-primary"> <span class="d-none d-sm-inline">Product Type</span>  </a>
                           </li>
                       </ul>
                   </li>
@@ -32,7 +32,7 @@
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
                       <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                           <li class="w-100">
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                              <a href="#" class="nav-link px-0 text-primary"> <span class="d-none d-sm-inline">Item</span> 1</a>
                           </li>
                           <li>
                               <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
@@ -81,13 +81,14 @@
           </div>
       </div>
       <div class="col py-3">
-          <h3>Left Sidebar with Submenus</h3>
+        <router-outlet></router-outlet>
+          <!-- <h3>Left Sidebar with Submenus</h3>
           <p class="lead">
               An example 2-level sidebar with collasible menu items. The menu functions like an "accordion" where only a single
               menu is be open at a time. While the sidebar itself is not toggle-able, it does responsively shrink in width on smaller screens.</p>
           <ul class="list-unstyled">
               <li><h5>Responsive</h5> shrinks in width, hides text labels and collapses to icons only on mobile</li>
-          </ul>
+          </ul> -->
       </div>
   </div>
 </div>

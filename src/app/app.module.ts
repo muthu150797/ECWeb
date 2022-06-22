@@ -14,11 +14,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {SharedModule} from "./shared/shared.module";
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrandsComponent } from './dashboard/brands/brands.component';
+import { ProductTypesComponent } from './dashboard/product-types/product-types.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    BrandsComponent,
+    ProductTypesComponent
   ],
   imports: [
     BrowserModule,
