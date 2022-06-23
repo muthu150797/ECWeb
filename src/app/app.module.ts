@@ -29,6 +29,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {DialogModule} from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
 import {ProgressBarModule} from 'primeng/progressbar';
+import { ProductService } from './dashboard/ProductService';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
     NgxSpinnerModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [CustomerService,
+  providers: [CustomerService,ProductService,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
