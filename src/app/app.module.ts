@@ -16,6 +16,19 @@ import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrandsComponent } from './dashboard/brands/brands.component';
 import { ProductTypesComponent } from './dashboard/product-types/product-types.component';
+import {TableModule} from 'primeng/table';
+import { FormsModule } from '@angular/forms';
+import { CustomerService } from './dashboard/customerService';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import {SliderModule} from 'primeng/slider';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {DialogModule} from 'primeng/dialog';
+import {ToastModule} from 'primeng/toast';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -30,11 +43,24 @@ import { ProductTypesComponent } from './dashboard/product-types/product-types.c
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+    TableModule,
+    CalendarModule,
+		SliderModule,
+		DialogModule,
+		MultiSelectModule,
+		ContextMenuModule,
+		DropdownModule,
+		ButtonModule,
+		ToastModule,
+    InputTextModule,
+    ProgressBarModule,
+    FormsModule,
     HomeModule,
+    InputTextModule,
     NgxSpinnerModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [
+  providers: [CustomerService,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

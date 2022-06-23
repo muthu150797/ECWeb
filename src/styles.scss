@@ -9,7 +9,9 @@
 
 /* Importing Datepicker SCSS file. */
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
-
+@import '~primeng/resources/primeng.min.css';
+@import '~primeng/resources/themes/bootstrap4-light-blue/theme.css';
+@import '~primeicons/primeicons.css';
 .xng-breadcrumb-root {
   padding: 8px 16px;
   display:inline;

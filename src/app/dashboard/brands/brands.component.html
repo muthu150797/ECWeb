@@ -1,1 +1,19 @@
-<p>brands works!</p>
+<p-table [columns]="cols" [value]="users">
+  <ng-template pTemplate="caption">
+Users List
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th *ngFor="let col of columns">
+              {{col.header}}
+          </th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user let-columns="columns">
+      <tr>
+          <td *ngFor="let col of columns">
+              {{user[col.field]}}
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
