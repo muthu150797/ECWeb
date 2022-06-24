@@ -1,11 +1,23 @@
 <div class="card">
   <h5>Manage Brands</h5>
-      <p-table [value]="brandList" dataKey="id" editMode="row" responsiveLayout="scroll">
-          <ng-template pTemplate="header">
+      <p-table #dt1 [value]="brandList" [resizableColumns]="true" styleClass="p-datatable-sm" dataKey="id" editMode="row" responsiveLayout="scroll"
+      [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [globalFilterFields]="['id','name']"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+              <span class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+              </span>
+          </div>
+      </ng-template>
+        <ng-template pTemplate="header">
               <tr>
-                  <th>ID</th>
-                  <th>Brand Name</th>
-                  <th style="width:8rem"></th>
+                  <th pSortableColumn="id" pResizableColumn>ID</th>
+                  <th pSortableColumn="name" pResizableColumn>Brand Name</th>
+                  <th style="text-align: center;width:8rem">
+                    <p-button (click)="AddBrand()" pRipple type="button" icon="pi pi-plus" styleClass="p-button-rounded p-button-text"></p-button>
+                  </th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-brand let-editing="editing" let-ri="rowIndex">
@@ -33,9 +45,13 @@
                       <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(brand)" class="p-button-rounded p-button-text"></button>
                       <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(brand)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
                       <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(brand, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-                  </td>
+                      <button  pButton pRipple type="button" icon="pi pi-trash" (click)="DeleteBrand(brand)" class="p-button-rounded p-button-text"></button>
+                    </td>
               </tr>
           </ng-template>
+          <!-- <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template> -->
       </p-table>
   </div>
 
