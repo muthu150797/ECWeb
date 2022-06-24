@@ -125,4 +125,19 @@ export class ProductService {
     DeleteBrand(brand:any) {
       return this.http.get<any>(this.baseUrl + 'products/DeleteBrand?id='+brand.id);
     }
+
+    GetAllProductTypes()
+    {
+      return this.http.post<any>(this.baseUrl + 'products/Types',null);
+    }
+    AddOrUpdateProductType(type:any) {
+      return this.http.post<any>(this.baseUrl + 'products/AddOrUpdateProductType',
+      {
+        "Id":type.id,
+        "Name":type.name
+      });
+    }
+    DeleteProductType(type:any) {
+      return this.http.get<any>(this.baseUrl + 'products/DeleteProductType?id='+type.id);
+    }
 }

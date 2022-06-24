@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: `dashboard`,
     component: DashboardComponent,
-    data: { breadcrumb: `Not Found` },
+    data: { breadcrumb: `Dashboard` },
   },
   {
     path: `dashboard`,
@@ -38,10 +38,12 @@ const routes: Routes = [
 
     children: [
       {
-        path: 'brands',component:BrandsComponent
+        path: 'brands',component:BrandsComponent,
+        data: { breadcrumb: `Brands` },
       },
       {
-        path: 'productTypes',component:ProductTypesComponent
+        path: 'productTypes',component:ProductTypesComponent,
+        data: { breadcrumb: `Product Types` },
       },
     ],
   },
