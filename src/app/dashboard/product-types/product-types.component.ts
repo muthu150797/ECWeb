@@ -15,7 +15,8 @@ import { ProductService } from '../ProductService';
 export class ProductTypesComponent implements OnInit {
   customers: Customer[];
   first = 0;
-
+  display=false;
+  contentName='';
   rows = 10;
   representatives: Representative[];
   clonedProducts: { [s: string]: IProductType } = {};
@@ -27,6 +28,7 @@ export class ProductTypesComponent implements OnInit {
   activityValues: number[] = [0, 100];
   cols: { field: string; header: string; }[];
   productTypeList: any;
+  contentId: any;
 
   constructor(private productService:ProductService,private toastr: ToastrService,private customerService: CustomerService) {}
   ngOnInit() {
@@ -147,8 +149,13 @@ export class ProductTypesComponent implements OnInit {
       }
     );
   }
-  DeleteProductType(type:any){
-    this.productService.DeleteProductType(type).subscribe(
+  showDialog(type){
+    this.display=true;
+    this.contentName=type.name;
+    this.contentId=type.id;
+  }
+  DeleteProductType(typeId:any){
+    this.productService.DeleteProductType(typeId).subscribe(
       (res: any) => {
         console.log('response from deleting product type', res);
         if (res.statusCode == 200) {
@@ -163,5 +170,8 @@ export class ProductTypesComponent implements OnInit {
         console.log(error);
       }
     );
+    this.contentName='';
+    this.contentId=0;
+    this.display=false;
   }
 }

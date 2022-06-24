@@ -137,7 +137,7 @@ export class ProductService {
         "Name":type.name
       });
     }
-    DeleteProductType(type:any) {
-      return this.http.get<any>(this.baseUrl + 'products/DeleteProductType?id='+type.id);
+    DeleteProductType(typeId:any) {
+      return this.http.get<any>(this.baseUrl + 'products/DeleteProductType?id='+typeId);
     }
 }
