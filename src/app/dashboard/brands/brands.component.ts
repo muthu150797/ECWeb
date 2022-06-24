@@ -4,6 +4,7 @@ import { SelectItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Product } from '../Product';
 import { ProductService } from '../ProductService';
+import { IBrand } from 'src/app/shared/models/brand';
 
 @Component({
   selector: 'app-brands',
@@ -25,10 +26,12 @@ products2: Product[];
 statuses: SelectItem[];
 
 clonedProducts: { [s: string]: Product; } = {};
+  brandList: IBrand;
 
 constructor(private productService: ProductService, private messageService: MessageService) { }
 
 ngOnInit() {
+  this.GetAllBrands();
   this.users = [
     { id: '1', name: 'kiran',email:'kiran@gmail.com' },
     { id: '2', name: 'tom',email:'tom@gmail.com' },
@@ -39,7 +42,7 @@ ngOnInit() {
   this.cols = [
       { field: 'id', header: 'Id' },
       { field: 'name', header: 'Name' },
-      { field: 'email', header: 'Email' },
+      // { field: 'email', header: 'Email' },
   ];
     this.productService.getProductsSmall().then(data => this.products1 = data);
     this.productService.getProductsSmall().then(data => this.products2 = data);
@@ -47,13 +50,13 @@ ngOnInit() {
     this.statuses = [{label: 'In Stock', value: 'INSTOCK'},{label: 'Low Stock', value: 'LOWSTOCK'},{label: 'Out of Stock', value: 'OUTOFSTOCK'}]
 }
 
-onRowEditInit(product: Product) {
-    this.clonedProducts[product.id] = {...product};
+onRowEditInit(brand: any) {
+    this.clonedProducts[brand.id] = {...brand};
 }
 
-onRowEditSave(product: Product) {
-    if (product.price > 0) {
-        delete this.clonedProducts[product.id];
+onRowEditSave(brand: any) {
+    if (brand.id > 0) {
+        delete this.clonedProducts[brand.id];
         this.messageService.add({severity:'success', summary: 'Success', detail:'Product is updated'});
     }
     else {
@@ -61,8 +64,19 @@ onRowEditSave(product: Product) {
     }
 }
 
-onRowEditCancel(product: Product, index: number) {
-    this.products2[index] = this.clonedProducts[product.id];
-    delete this.clonedProducts[product.id];
+onRowEditCancel(brand: any, index: number) {
+    this.brandList[index] = this.clonedProducts[brand.id];
+    delete this.clonedProducts[brand.id];
+}
+  GetAllBrands() {
+  this.productService.GetAllBrands().subscribe((brands: IBrand) =>
+  {
+    this.brandList=brands;
+    console.log("brands",brands);
+    //this.toastr.success('Address saved');
+    //this.checkoutForm.get('addressForm').reset(address);
+  }, error => {
+    console.log(error);
+  });
 }
 }

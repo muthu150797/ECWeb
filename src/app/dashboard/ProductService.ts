@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { Product } from './product';
 
@@ -40,6 +41,7 @@ export class ProductService {
         "Yoga Mat",
         "Yoga Set",
     ];
+  baseUrl=environment.apiUrl;
 
     constructor(private http: HttpClient) { }
 
@@ -109,5 +111,8 @@ export class ProductService {
 
     generateRating() {
         return Math.floor(Math.random() * Math.floor(5)+1);
+    }
+    GetAllBrands() {
+      return this.http.post<any>(this.baseUrl + 'products/brands',null);
     }
 }
