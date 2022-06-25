@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 
 import { Product } from './product';
 
@@ -139,5 +140,9 @@ export class ProductService {
     }
     DeleteProductType(typeId:any) {
       return this.http.get<any>(this.baseUrl + 'products/DeleteProductType?id='+typeId);
+    }
+    GetAllDeliveryMethods()
+    {
+      return this.http.get(this.baseUrl + 'orders/getDeliveryMethods');
     }
 }

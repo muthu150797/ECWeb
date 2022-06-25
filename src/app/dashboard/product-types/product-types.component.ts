@@ -31,8 +31,8 @@ export class ProductTypesComponent implements OnInit {
   display=false;
   contentName='';
   header: string;
-  productTypeName: string;
   popup: boolean;
+  productTypeName: string;
   constructor(private productService:ProductService,private toastr: ToastrService,private customerService: CustomerService) {}
   ngOnInit() {
     this.GetAllProductTypes();

@@ -1,0 +1,101 @@
+<div class="card">
+  <h5>Manage Delivery Methods</h5>
+      <p-table #dt1 [value]="deliveryMethodList" [resizableColumns]="true" styleClass="p-datatable-sm" dataKey="id" editMode="row" responsiveLayout="scroll"
+      [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [globalFilterFields]="['id','shortName','price']"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+              <span class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+              </span>
+          </div>
+      </ng-template>
+        <ng-template pTemplate="header">
+              <tr>
+                  <th pSortableColumn="id" pResizableColumn>ID</th>
+                  <th pSortableColumn="shortName" pResizableColumn>Short Name</th>
+                  <th pSortableColumn="deliveryTime" pResizableColumn>Delivery Time</th>
+                  <th pSortableColumn="price" pResizableColumn>Price</th>
+
+                  <th style="text-align: center;width:8rem">
+                    <p-button (click)="showDialog2()" pRipple type="button" icon="pi pi-plus" styleClass="p-button-rounded p-button-text"></p-button>
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-type let-editing="editing" let-ri="rowIndex">
+              <tr [pEditableRow]="type">
+                  <td>
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input [readonly]="true" pInputText type="text" [(ngModel)]="type.id">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{type.id}}
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+                  <td>
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input pInputText type="text" [(ngModel)]="type.shortName" required>
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{type.shortName}}
+                          </ng-template>
+                      </p-cellEditor></td>
+                      <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="type.deliveryTime" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{type.deliveryTime}}
+                            </ng-template>
+                        </p-cellEditor></td> <td>
+                          <p-cellEditor>
+                              <ng-template pTemplate="input">
+                                  <input pInputText type="text" [(ngModel)]="type.price" required>
+                              </ng-template>
+                              <ng-template pTemplate="output">
+                                ${{type.price}}
+                              </ng-template>
+                          </p-cellEditor></td>
+                  <td style="text-align:center">
+                      <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(type)" class="p-button-rounded p-button-text"></button>
+                      <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(type)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(type, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                      <button  pButton pRipple type="button" icon="pi pi-trash" (click)="showDialog1(type)" class="p-button-rounded p-button-text"></button>
+                    </td>
+              </tr>
+          </ng-template>
+          <!-- <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template> -->
+      </p-table>
+  </div>
+<p-dialog header="{{header}}" [(visible)]="display" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false">
+    <p> {{contentName}}?</p>
+        <ng-template pTemplate="footer">
+        <p-button (click)="display=false" label="No" styleClass="p-button-text"></p-button>
+        <p-button (click)="DeleteProductType(contentId)" label="Yes" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
+
+<p-dialog [maximizable]="false" header="{{header}}" [(visible)]="popup" [draggable]="true" [resizable]="true">
+  <div class="sizes">
+    <input [readonly]="false" [value]="shortName" pInputText type="text"  placeholder="Enter Short Name" />
+  </div>
+  <!-- <div class="sizes">
+    <input [readonly]="false" [(ngModel)]="deliveryTime" pInputText type="text"  placeholder="Enter Delivery Time" />
+  </div> <div class="sizes">
+    <input [readonly]="false" [(ngModel)]="price" pInputText type="text"  placeholder="Enter Price" />
+  </div>
+  <br/> -->
+  <div class="sizes">
+    <button pButton pRipple label="Save" (click)="AddDeliveryMethod()"
+    class="p-button-raised">
+  </button>
+  </div>
+  </p-dialog>

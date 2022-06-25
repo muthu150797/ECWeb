@@ -30,13 +30,15 @@ import {DialogModule} from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
 import {ProgressBarModule} from 'primeng/progressbar';
 import { ProductService } from './dashboard/ProductService';
+import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-methods.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     BrandsComponent,
-    ProductTypesComponent
+    ProductTypesComponent,
+    DeliveryMethodsComponent
   ],
   imports: [
     BrowserModule,

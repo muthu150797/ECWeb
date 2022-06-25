@@ -8,6 +8,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrandsComponent } from './dashboard/brands/brands.component';
 import { ProductTypesComponent } from './dashboard/product-types/product-types.component';
+import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-methods.component';
 
 const routes: Routes = [
   { path: ``, component: HomeComponent, data: { breadcrumb: `Home` } },
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'productTypes',component:ProductTypesComponent,
         data: { breadcrumb: `Product Types` },
+      },
+      {
+        path: 'deliveryMethods',component:DeliveryMethodsComponent,
+        data: { breadcrumb: `Delivery Methods` },
       },
     ],
   },
