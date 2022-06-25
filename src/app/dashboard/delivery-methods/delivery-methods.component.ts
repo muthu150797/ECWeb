@@ -25,10 +25,9 @@ export class DeliveryMethodsComponent implements OnInit {
   activityValues: number[] = [0, 100];
   cols: { field: string; header: string; }[];
   deliveryMethodList: IDeliveryMethod[];
-  addItem:IDeliveryMethod;
-  deliveryTime: string;
-  id: number;
-  price: number;
+  deliveryTime='';
+  id=0;
+  price=0;
   shortName='';
   constructor(private productService: ProductService,private toastr:ToastrService) {
   }
@@ -43,13 +42,7 @@ export class DeliveryMethodsComponent implements OnInit {
     ];
     this.GetAllDeliveryMethods();
   }
-  LoadAddItem(){
-    this.addItem.shortName='dfg';
-    this.deliveryTime='';
-    this.id=0;
-    this.deliveryTime='';
-    this.price=12;
-  }
+
   onRowEditInit(deliveryMethod: any) {
     this.clonedProducts[deliveryMethod.id] = { ...deliveryMethod };
   }
@@ -106,7 +99,10 @@ export class DeliveryMethodsComponent implements OnInit {
     this.header='Add Delivery Method';
   }
   AddDeliveryMethod(){
-    console.log("additem",this.addItem);
+    let item;
+
+   item={shortName:this.shortName,delivetyTime:this.deliveryTime,price:Number(this.price)};
+    console.log("additem",item);
   }
   GetAllDeliveryMethods()
   {

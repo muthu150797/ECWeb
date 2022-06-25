@@ -85,14 +85,15 @@
 
 <p-dialog [maximizable]="false" header="{{header}}" [(visible)]="popup" [draggable]="true" [resizable]="true">
   <div class="sizes">
-    <input [readonly]="false" [value]="shortName" pInputText type="text"  placeholder="Enter Short Name" />
-  </div>
-  <!-- <div class="sizes">
+    <input [readonly]="false" [(ngModel)]="shortName" pInputText type="text"  placeholder="Enter Short Name" />
+  </div> <br/>
+  <div class="sizes">
     <input [readonly]="false" [(ngModel)]="deliveryTime" pInputText type="text"  placeholder="Enter Delivery Time" />
-  </div> <div class="sizes">
-    <input [readonly]="false" [(ngModel)]="price" pInputText type="text"  placeholder="Enter Price" />
+  </div> <br/>
+  <div class="sizes">
+    <input [readonly]="false"  [(ngModel)]="price" pInputText type="number"  placeholder="Enter Price" />
   </div>
-  <br/> -->
+  <br/>
   <div class="sizes">
     <button pButton pRipple label="Save" (click)="AddDeliveryMethod()"
     class="p-button-raised">
