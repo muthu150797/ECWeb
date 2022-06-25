@@ -16,7 +16,7 @@
                   <th pSortableColumn="id" pResizableColumn>ID</th>
                   <th pSortableColumn="name" pResizableColumn>Brand Name</th>
                   <th style="text-align: center;width:8rem">
-                    <p-button (click)="AddBrand()" pRipple type="button" icon="pi pi-plus" styleClass="p-button-rounded p-button-text"></p-button>
+                    <p-button (click)="showDialog2()" pRipple type="button" icon="pi pi-plus" styleClass="p-button-rounded p-button-text"></p-button>
                   </th>
               </tr>
           </ng-template>
@@ -25,7 +25,7 @@
                   <td>
                       <p-cellEditor>
                           <ng-template pTemplate="input">
-                              <input pInputText type="text" [(ngModel)]="brand.id">
+                              <input [readonly]="true" pInputText type="text" [(ngModel)]="brand.id">
                           </ng-template>
                           <ng-template pTemplate="output">
                               {{brand.id}}
@@ -45,7 +45,7 @@
                       <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(brand)" class="p-button-rounded p-button-text"></button>
                       <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(brand)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
                       <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(brand, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-                      <button  pButton pRipple type="button" icon="pi pi-trash" (click)="DeleteBrand(brand)" class="p-button-rounded p-button-text"></button>
+                      <button  pButton pRipple type="button" icon="pi pi-trash" (click)="showDialog1(brand)" class="p-button-rounded p-button-text"></button>
                     </td>
               </tr>
           </ng-template>
@@ -54,4 +54,22 @@
         </ng-template> -->
       </p-table>
   </div>
-
+  <p-dialog header="{{header}}" [(visible)]="display" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}"
+  [draggable]="false" [resizable]="false">
+  <p> {{contentName}}?</p>
+      <ng-template pTemplate="footer">
+      <p-button (click)="display=false" label="No" styleClass="p-button-text"></p-button>
+      <p-button (click)="DeleteBrand(contentId)" label="Yes" styleClass="p-button-text"></p-button>
+      </ng-template>
+</p-dialog>
+<p-dialog [maximizable]="false" header="{{header}}" [(visible)]="popup" [draggable]="true" [resizable]="true">
+  <div class="sizes">
+    <input [readonly]="false" [(ngModel)]="brandName" pInputText type="text"  placeholder="Enter Brand Name" />
+  </div>
+  <br/>
+  <div class="sizes">
+    <button pButton pRipple label="Save" (click)="AddBrand()"
+    class="p-button-raised">
+  </button>
+  </div>
+  </p-dialog>

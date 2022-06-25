@@ -26,7 +26,12 @@ export class BrandsComponent implements OnInit {
   products2: Product[];
 
   statuses: SelectItem[];
-
+  contentId: any;
+  popup=false;
+  display=false;
+  brandName='';
+  contentName='';
+  header: string;
   clonedProducts: { [s: string]: IBrand } = {};
   brandList: any;
   customers: any;
@@ -119,6 +124,12 @@ export class BrandsComponent implements OnInit {
   isFirstPage(): boolean {
     return this.brandList ? this.first === 0 : true;
   }
+  showDialog1(content){
+    this.display=true;
+    this.header='Delete Brand';
+    this.contentName="Are you sure want to delete the "+content.name;
+    this.contentId=content.id;
+  }
   GetAllBrands() {
     this.productService.GetAllBrands().subscribe(
       (brands: IBrand) => {
@@ -131,9 +142,10 @@ export class BrandsComponent implements OnInit {
         console.log(error);
       }
     );
+
   }
-  DeleteBrand(brand:any){
-    this.productService.DeleteBrand(brand).subscribe(
+  DeleteBrand(brandId:any){
+    this.productService.DeleteBrand(brandId).subscribe(
       (res: any) => {
         console.log('response from deleting brand', res);
         if (res.statusCode == 200) {
@@ -148,11 +160,19 @@ export class BrandsComponent implements OnInit {
         console.log(error);
       }
     );
+    this.header='';
+    this.contentName='';
+    this.contentId=0;
+    this.display=false;
+  }
+  showDialog2(){
+    this.popup=true;
+    this.header='Add Brand';
   }
   AddBrand() {
     let brand = {
       id: 0,
-      name: 'rolar',
+      name: this.brandName,
     };
     this.productService.AddOrUpdateBrand(brand).subscribe(
       (res: ResponseModel) => {
@@ -178,6 +198,9 @@ export class BrandsComponent implements OnInit {
         console.log(error);
       }
     );
+    this.header='';
+    this.brandName='';
+    this.popup=false;
   }
 
 }

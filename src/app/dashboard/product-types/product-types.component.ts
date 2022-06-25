@@ -15,8 +15,7 @@ import { ProductService } from '../ProductService';
 export class ProductTypesComponent implements OnInit {
   customers: Customer[];
   first = 0;
-  display=false;
-  contentName='';
+
   rows = 10;
   representatives: Representative[];
   clonedProducts: { [s: string]: IProductType } = {};
@@ -29,7 +28,11 @@ export class ProductTypesComponent implements OnInit {
   cols: { field: string; header: string; }[];
   productTypeList: any;
   contentId: any;
-
+  display=false;
+  contentName='';
+  header: string;
+  productTypeName: string;
+  popup: boolean;
   constructor(private productService:ProductService,private toastr: ToastrService,private customerService: CustomerService) {}
   ngOnInit() {
     this.GetAllProductTypes();
@@ -132,7 +135,7 @@ export class ProductTypesComponent implements OnInit {
   AddProductType() {
     let type = {
       id: 0,
-      name: 'asd',
+      name: this.productTypeName,
     };
     this.productService.AddOrUpdateProductType(type).subscribe(
       (res: ResponseModel) => {
@@ -148,11 +151,19 @@ export class ProductTypesComponent implements OnInit {
         console.log(error);
       }
     );
+    this.header='';
+    this.productTypeName='';
+    this.popup=false;
   }
-  showDialog(type){
+  showDialog2(){
+    this.popup=true;
+    this.header='Add Product Type';
+  }
+  showDialog1(content){
     this.display=true;
-    this.contentName=type.name;
-    this.contentId=type.id;
+    this.header='Delete Product Type';
+    this.contentName="Are you sure want to delete the "+content.name;
+    this.contentId=content.id;
   }
   DeleteProductType(typeId:any){
     this.productService.DeleteProductType(typeId).subscribe(
@@ -172,6 +183,7 @@ export class ProductTypesComponent implements OnInit {
     );
     this.contentName='';
     this.contentId=0;
+    this.header='';
     this.display=false;
   }
 }
