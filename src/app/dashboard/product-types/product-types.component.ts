@@ -162,7 +162,7 @@ export class ProductTypesComponent implements OnInit {
   showDialog1(content){
     this.display=true;
     this.header='Delete Product Type';
-    this.contentName="Are you sure want to delete the "+content.name;
+    this.contentName="Are you sure want to delete the "+content.name+"?";
     this.contentId=content.id;
   }
   DeleteProductType(typeId:any){

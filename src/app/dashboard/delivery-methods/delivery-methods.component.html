@@ -23,49 +23,49 @@
                   </th>
               </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-type let-editing="editing" let-ri="rowIndex">
-              <tr [pEditableRow]="type">
+          <ng-template pTemplate="body" let-method let-editing="editing" let-ri="rowIndex">
+              <tr [pEditableRow]="method">
                   <td>
                       <p-cellEditor>
                           <ng-template pTemplate="input">
-                              <input [readonly]="true" pInputText type="text" [(ngModel)]="type.id">
+                              <input [readonly]="true" pInputText type="text" [(ngModel)]="method.id">
                           </ng-template>
                           <ng-template pTemplate="output">
-                              {{type.id}}
+                              {{method.id}}
                           </ng-template>
                       </p-cellEditor>
                   </td>
                   <td>
                       <p-cellEditor>
                           <ng-template pTemplate="input">
-                              <input pInputText type="text" [(ngModel)]="type.shortName" required>
+                              <input pInputText type="text" [(ngModel)]="method.shortName" required>
                           </ng-template>
                           <ng-template pTemplate="output">
-                              {{type.shortName}}
+                              {{method.shortName}}
                           </ng-template>
                       </p-cellEditor></td>
                       <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="type.deliveryTime" required>
+                                <input pInputText type="text" [(ngModel)]="method.deliveryTime" required>
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{type.deliveryTime}}
+                                {{method.deliveryTime}}
                             </ng-template>
                         </p-cellEditor></td> <td>
                           <p-cellEditor>
                               <ng-template pTemplate="input">
-                                  <input pInputText type="text" [(ngModel)]="type.price" required>
+                                  <input pInputText type="text" [(ngModel)]="method.price" required>
                               </ng-template>
                               <ng-template pTemplate="output">
-                                ${{type.price}}
+                                ${{method.price}}
                               </ng-template>
                           </p-cellEditor></td>
                   <td style="text-align:center">
-                      <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(type)" class="p-button-rounded p-button-text"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(type)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(type, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-                      <button  pButton pRipple type="button" icon="pi pi-trash" (click)="showDialog1(type)" class="p-button-rounded p-button-text"></button>
+                      <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(method)" class="p-button-rounded p-button-text"></button>
+                      <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(method)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(method, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                      <button  pButton pRipple type="button" icon="pi pi-trash" (click)="showDialog1(method)" class="p-button-rounded p-button-text"></button>
                     </td>
               </tr>
           </ng-template>
@@ -79,7 +79,7 @@
     <p> {{contentName}}?</p>
         <ng-template pTemplate="footer">
         <p-button (click)="display=false" label="No" styleClass="p-button-text"></p-button>
-        <p-button (click)="DeleteProductType(contentId)" label="Yes" styleClass="p-button-text"></p-button>
+        <p-button (click)="DeleteDeliveryMethod(contentId)" label="Yes" styleClass="p-button-text"></p-button>
         </ng-template>
 </p-dialog>
 

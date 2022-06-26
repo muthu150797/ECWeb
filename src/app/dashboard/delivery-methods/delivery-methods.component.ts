@@ -29,6 +29,7 @@ export class DeliveryMethodsComponent implements OnInit {
   id=0;
   price=0;
   shortName='';
+  response: any;
   constructor(private productService: ProductService,private toastr:ToastrService) {
   }
 
@@ -50,7 +51,7 @@ export class DeliveryMethodsComponent implements OnInit {
   onRowEditSave(deliveryMethod: any) {
     if (deliveryMethod.id > 0) {
       delete this.clonedProducts[deliveryMethod.id];
-      this.productService.AddOrUpdateProductType(deliveryMethod).subscribe(
+      this.productService.AddOrUpdateDeliveryMethod(deliveryMethod).subscribe(
         (res: ResponseModel) => {
           console.log('response from updating type', res);
           if (res.statusCode == 200) {
@@ -98,11 +99,53 @@ export class DeliveryMethodsComponent implements OnInit {
     this.popup=true;
     this.header='Add Delivery Method';
   }
+  showDialog1(content){
+    this.display=true;
+    this.header='Delete Delivery Method';
+    this.contentName="Are you sure want to delete the "+content.shortName+"?";
+    this.contentId=content.id;
+  }
+  DeleteDeliveryMethod(dlMethodId:any){
+    this.productService.DeleteDeliveryMethod(dlMethodId).subscribe(
+      (res: any) => {
+        console.log('response from deleting product type', res);
+        if (res.statusCode == 200) {
+          this.GetAllDeliveryMethods();
+          this.toastr.success(res.message);
+        } else {
+          this.GetAllDeliveryMethods();
+          this.toastr.error(res.message);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.contentName='';
+    this.contentId=0;
+    this.header='';
+    this.display=false;
+  }
   AddDeliveryMethod(){
     let item;
-
-   item={shortName:this.shortName,delivetyTime:this.deliveryTime,price:Number(this.price)};
+   item={shortName:this.shortName,deliveryTime:this.deliveryTime,price:Number(this.price)};
     console.log("additem",item);
+    this.productService.AddOrUpdateDeliveryMethod(item).subscribe((res:ResponseModel)=>
+    {
+      this.response=res;
+      if(res.statusCode==200){
+        this.toastr.success(res.message);
+      }
+      else{
+        this.toastr.error(res.message);
+      }
+      this.GetAllDeliveryMethods();
+      this.popup=false;
+      this.deliveryTime='';
+      this.price=0;
+      this.shortName='';
+      console.log("adding or update res",res);
+    })
   }
   GetAllDeliveryMethods()
   {

@@ -145,4 +145,10 @@ export class ProductService {
     {
       return this.http.get(this.baseUrl + 'orders/getDeliveryMethods');
     }
+    AddOrUpdateDeliveryMethod(delMethod:any) {
+      return this.http.post<any>(this.baseUrl + 'products/AddOrUpdateDeliveryMethod',delMethod);
+    }
+    DeleteDeliveryMethod(typeId:any) {
+      return this.http.get<any>(this.baseUrl + 'products/DeleteDeliveryMethod?id='+typeId);
+    }
 }
