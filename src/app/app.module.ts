@@ -32,6 +32,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import { ProductService } from './dashboard/ProductService';
 import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-methods.component';
 import { ProductsComponent } from './dashboard/products/products.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { ProductsComponent } from './dashboard/products/products.component';
 		MultiSelectModule,
 		ContextMenuModule,
 		DropdownModule,
+    InputTextareaModule,
 		ButtonModule,
+    InputNumberModule,
 		ToastModule,
     InputTextModule,
     ProgressBarModule,

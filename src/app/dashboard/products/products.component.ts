@@ -5,6 +5,7 @@ import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from 'src/app/shop/shop.service';
 import { City } from '../City';
 import { ProductService } from '../ProductService';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,7 @@ import { ProductService } from '../ProductService';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  products:any;
+  product:any;
   totalCount: number;
   first = 0;
   rows = 10;
@@ -27,6 +28,7 @@ export class ProductsComponent implements OnInit {
   cities: City[];
   selectedCity2: City;
   popup: boolean;
+  productDialog: boolean;
   constructor(private toastr:ToastrService,private productService:ProductService) {
     this.cities = [
       {name: 'New York', code: 'NY'},
@@ -118,6 +120,16 @@ export class ProductsComponent implements OnInit {
     this.contentId=content.id;
   }
   AddProduct(){
+    let prod=[{name:'',description:'',price:0,}];
+    this.product=prod;
+    this.productDialog=true;
+
+  }
+   saveProduct(){
+   console.log("adding product",this.product);
+   this.productDialog=false;
+  }
+  hideDialog(){
 
   }
   DeleteProduct(productId){
@@ -141,4 +153,5 @@ export class ProductsComponent implements OnInit {
     this.header='';
     this.display=false;
   }
+
 }
