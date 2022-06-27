@@ -55,7 +55,7 @@
                         </p-cellEditor></td> <td>
                           <p-cellEditor>
                               <ng-template pTemplate="input">
-                                  <input pInputText type="text" [(ngModel)]="method.price" required>
+                                  <input pInputText min="0" type="number" [(ngModel)]="method.price" required>
                               </ng-template>
                               <ng-template pTemplate="output">
                                 ${{method.price}}
@@ -91,7 +91,7 @@
     <input [readonly]="false" [(ngModel)]="deliveryTime" pInputText type="text"  placeholder="Enter Delivery Time" />
   </div> <br/>
   <div class="sizes">
-    <input [readonly]="false"  [(ngModel)]="price" pInputText type="number"  placeholder="Enter Price" />
+    <input [readonly]="false" min="0" [(ngModel)]="price" pInputText type="number"  placeholder="Enter Price" />
   </div>
   <br/>
   <div class="sizes">

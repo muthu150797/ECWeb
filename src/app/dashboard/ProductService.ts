@@ -156,4 +156,7 @@ export class ProductService {
     {
       return this.http.post(this.baseUrl + 'products/getProducts',null);
     }
+    DeleteProduct(productId:any) {
+      return this.http.get<any>(this.baseUrl + 'products/deleteProduct?id='+productId);
+    }
 }
