@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ResponseModel } from 'src/app/Model/ResponseModel';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from 'src/app/shop/shop.service';
+import { City } from '../City';
 import { ProductService } from '../ProductService';
 
 @Component({
@@ -23,8 +24,18 @@ export class ProductsComponent implements OnInit {
   display=false;
   contentName='';
   header: string;
+  cities: City[];
+  selectedCity2: City;
   popup: boolean;
-  constructor(private toastr:ToastrService,private productService:ProductService) { }
+  constructor(private toastr:ToastrService,private productService:ProductService) {
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+  ];
+   }
 
   ngOnInit(): void {
     this.GetAllProducts();
@@ -44,6 +55,7 @@ export class ProductsComponent implements OnInit {
     this.clonedProducts[product.id] = { ...product };
   }
   onRowEditSave(product: any) {
+    console.log('prod',product)
     if (product.id > 0) {
       delete this.clonedProducts[product.id];
       this.productService.AddOrUpdateProductType(product).subscribe(
@@ -105,7 +117,9 @@ export class ProductsComponent implements OnInit {
     this.contentName="Are you sure want to delete the "+content.name+"?";
     this.contentId=content.id;
   }
-  AddProduct(){}
+  AddProduct(){
+
+  }
   DeleteProduct(productId){
     this.productService.DeleteProduct(productId).subscribe(
       (res: any) => {
