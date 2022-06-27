@@ -1,5 +1,6 @@
 <div class="card">
   <h5>Manage Products</h5>
+
       <p-table #dt1 [value]="productList" [resizableColumns]="true" styleClass="p-datatable-sm" dataKey="id" editMode="row" responsiveLayout="scroll"
       [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [globalFilterFields]="['id','name','price','productBrand','productType']"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
@@ -109,24 +110,30 @@
 <!-- implement product add popup -->
 <p-dialog [(visible)]="productDialog" [style]="{width: '600px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
+    <div class="formgrid grid">
+      <div class="field col">
+        <label>Brand:</label>
+        <p-dropdown [(ngModel)]="selectedBrandId" (onChange)="setValue($event,selectedBrandId)" [options]="brands" optionLabel="name" optionValue="id">
+        </p-dropdown>
+      </div>
+     <div class="field col">
+      <label>Product Type:</label>
+      <p-dropdown [(ngModel)]="selectedProductId"  [options]="productTypes" optionLabel="name" optionValue="id">
+      </p-dropdown>
+     </div>
+  </div>
       <!-- <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
-      <div class="field">
-          <label for="name">Name</label>
+      <div class="field col">
+          <label for="name">Name:</label>
           <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
           <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small>
       </div>
-      <div class="field">
+      <div class="field col">
           <label for="description">Description</label>
           <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3" cols="20"></textarea>
       </div>
-      <!-- <div class="field">
-          <label for="inventoryStatus">Inventory Status</label>
-          <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" placeholder="Select">
-              <ng-template let-option pTemplate="item">
-                  <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
-              </ng-template>
-          </p-dropdown>
-      </div> -->
+
+
 
       <!-- <div class="field">
           <label class="mb-3">Category</label>
@@ -150,19 +157,19 @@
           </div>
       </div> -->
 
-      <div class="formgrid grid">
+      <!-- <div class="formgrid grid"> -->
           <div class="field col">
-              <label for="price">Price</label>
+              <label for="price">Price:</label>
               <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
             </div>
-        <div class="field col">
+        <!-- <div class="field col">
               <label for="quantity">Quantity</label>
               <p-inputNumber id="quantity" [(ngModel)]="product.price"></p-inputNumber>
-          </div>
-      </div>
+          </div> -->
+      <!-- </div> -->
   </ng-template>
   <ng-template pTemplate="footer">
-      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="productDialog=false"></button>
       <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
   </ng-template>
 </p-dialog>

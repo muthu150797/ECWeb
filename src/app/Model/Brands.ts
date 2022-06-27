@@ -1,5 +1,5 @@
 export interface Brands{
-  Id:number;
+  id:number;
   Name:string;
 }
 export interface IProductType{
