@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IDeliveryMethod } from '../shared/models/deliveryMethod';
+import { ShopService } from '../shop/shop.service';
 
 import { Product } from './product';
 
@@ -44,7 +45,7 @@ export class ProductService {
     ];
   baseUrl=environment.apiUrl;
 
-    constructor(private http: HttpClient) { }
+    constructor(private shopService:ShopService,private http: HttpClient) { }
 
     getProductsSmall() {
         return this.http.get<any>('assets/products-small.json')
@@ -150,5 +151,9 @@ export class ProductService {
     }
     DeleteDeliveryMethod(typeId:any) {
       return this.http.get<any>(this.baseUrl + 'products/DeleteDeliveryMethod?id='+typeId);
+    }
+    GetAllProducts()
+    {
+      return this.http.post(this.baseUrl + 'products/getProducts',null);
     }
 }

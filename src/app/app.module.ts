@@ -31,6 +31,7 @@ import {ToastModule} from 'primeng/toast';
 import {ProgressBarModule} from 'primeng/progressbar';
 import { ProductService } from './dashboard/ProductService';
 import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-methods.component';
+import { ProductsComponent } from './dashboard/products/products.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-
     DashboardComponent,
     BrandsComponent,
     ProductTypesComponent,
-    DeliveryMethodsComponent
+    DeliveryMethodsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

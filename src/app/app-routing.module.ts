@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrandsComponent } from './dashboard/brands/brands.component';
 import { ProductTypesComponent } from './dashboard/product-types/product-types.component';
 import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-methods.component';
+import { ProductsComponent } from './dashboard/products/products.component';
 
 const routes: Routes = [
   { path: ``, component: HomeComponent, data: { breadcrumb: `Home` } },
@@ -50,6 +51,10 @@ const routes: Routes = [
         path: 'deliveryMethods',component:DeliveryMethodsComponent,
         data: { breadcrumb: `Delivery Methods` },
       },
+      {
+        path: 'products',component:ProductsComponent,
+        data: { breadcrumb: `Products` },
+      }
     ],
   },
   {
