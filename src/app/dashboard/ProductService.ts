@@ -162,4 +162,17 @@ export class ProductService {
     upload(formdata:any) {
       return this.http.post<any>(this.baseUrl + 'products/upload',formdata);
     }
+    AddOrUpdateProduct(product:any) {
+      return this.http.post<any>(this.baseUrl + 'products/AddOrUpdateProduct',[
+        {
+          "id": product.id,
+          "name": product.name,
+          "price": product.price,
+          "pictureUrl": product.pictureUrl,
+          "description": product.description,
+          "productTypeId": product.productTypeId,
+          "productBrandId": product.productBrandId
+        }
+      ]);
+    }
 }

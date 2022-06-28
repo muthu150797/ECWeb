@@ -114,12 +114,12 @@
     <div class="formgrid grid">
       <div class="field col">
         <label>Brand:</label>
-        <p-dropdown [(ngModel)]="selectedBrandId" (onChange)="setValue($event,selectedBrandId)" [options]="brands" optionLabel="name" optionValue="id">
+        <p-dropdown [(ngModel)]="selectedBrandId"  [options]="brands" optionLabel="name" optionValue="id">
         </p-dropdown>
       </div>
      <div class="field col">
       <label>Product Type:</label>
-      <p-dropdown [(ngModel)]="selectedProductId"  [options]="productTypes" optionLabel="name" optionValue="id">
+      <p-dropdown [(ngModel)]="selectedProductId" [options]="productTypes" optionLabel="name" optionValue="id">
       </p-dropdown>
      </div>
   </div>

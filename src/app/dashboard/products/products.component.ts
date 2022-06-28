@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
   selectedBrandId: number;
   brands: IBrand[];
   selectedProductId: number;
-  productTypes: IProductType[];
+  productTypes: any[];
   files: any;
   uploadedFiles: any[] = [];
   constructor(
@@ -65,13 +65,11 @@ export class ProductsComponent implements OnInit {
     ];
   }
   GetProductTypes() {
-    this.productService
-      .GetAllProductTypes()
-      .subscribe((res: IProductType[]) => {
-        this.productTypes = res;
-        this.selectedProductId = this.productTypes[0].Id;
-        console.log('brands', this.brands);
-      });
+    this.productService.GetAllProductTypes().subscribe((res) => {
+      this.productTypes = res;
+      this.selectedProductId = this.productTypes[0].id;
+      console.log('Product Types', this.selectedProductId);
+    });
   }
   GetBrands() {
     this.productService.GetAllBrands().subscribe((res: IBrand[]) => {
@@ -80,9 +78,7 @@ export class ProductsComponent implements OnInit {
       console.log('brands', this.brands);
     });
   }
-  setValue(val: any, val2: any) {
-    console.log('setvalue', val, val2);
-  }
+
   onRowEditInit(product: any) {
     this.clonedProducts[product.id] = { ...product };
   }
@@ -152,33 +148,63 @@ export class ProductsComponent implements OnInit {
     this.contentId = content.id;
   }
   onUpload(event) {
-    console.log("event",event)
-    let formData=new FormData();
-     for (let file of event.files) {
-      formData.append("files",file)
+    console.log('event', event);
+    let formData = new FormData();
+    for (let file of event.files) {
+      formData.append('files', file);
       this.uploadedFiles.push(file);
     }
-    console.log("upload file",this.uploadedFiles);
-    this.productService.upload(formData).subscribe((res)=>{
-     console.log(res);
-    })
-    // for (let file of event.files) {
-    //   this.uploadedFiles.push(file);
-    // }
+    console.log('upload file', this.uploadedFiles);
+    this.productService.upload(formData).subscribe((res) => {
+      if (res.fileUrls != '') {
+        this.product.pictureUrl = res.fileUrls;
+      }
+    });
+    console.log('call from onUpload method', this.product);
+  }
+  setBrandId(val: any, val2: any) {
+    //this.product.productBrandId=this.selectedBrandId;
+    console.log('setBrandId', this.product.productBrandId);
   }
   AddProduct() {
     let prod = {
+      id: 0,
       name: '',
       description: '',
+      pictureUrl: '',
       price: 0.0,
+      productType: '',
+      productBrand: '',
       productTypeId: this.selectedProductId,
       productBrandId: this.selectedBrandId,
     };
     this.product = prod;
+    console.log('adding product', this.product);
     this.productDialog = true;
   }
   saveProduct() {
-    console.log('adding product', this.product);
+    if(this.product.pictureUrl=='')
+    {
+      this.toastr.warning("Please Upload Product File");
+      return false;
+    }
+    console.log('going to save product', this.product);
+    this.product.productBrandId=this.selectedBrandId;
+    this.product.productTypeId=this.selectedProductId;
+    this.productService
+      .AddOrUpdateProduct(this.product)
+      .subscribe((res: ResponseModel) => {
+        if (res.statusCode == 200)
+        {
+          this.toastr.success(res.message);
+          this.GetAllProducts();
+        } else
+        {
+          this.GetAllProducts();
+          this.toastr.error(res.message);
+        }
+        console.log('response from server', res);
+      });
     this.productDialog = false;
   }
   hideDialog() {}
