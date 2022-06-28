@@ -8,6 +8,7 @@ import { ProductService } from '../ProductService';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { IBrand } from 'src/app/shared/models/brand';
 import { IProductType } from 'src/app/Model/Brands';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ import { IProductType } from 'src/app/Model/Brands';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  picUrl=environment.picBaseUrl
   product: any;
   totalCount: number;
   first = 0;
