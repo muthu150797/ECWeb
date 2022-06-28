@@ -22,7 +22,7 @@
                   <th pSortableColumn="productType" pResizableColumn>Type</th>
 
                   <th style="text-align: center;width:8rem">
-                    <p-button (click)="AddProduct()" pRipple type="button" icon="pi pi-plus" styleClass="p-button-rounded p-button-text"></p-button>
+                    <p-button (click)="InitializeProduct()" pRipple type="button" icon="pi pi-plus" styleClass="p-button-rounded p-button-text"></p-button>
                   </th>
               </tr>
           </ng-template>
@@ -87,9 +87,9 @@
                       </p-cellEditor>
                   </td>
                   <td style="text-align:center">
-                      <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                      <button  pButton pRipple type="button" icon="pi pi-pencil" (click)="EditProduct(product)" class="p-button-rounded p-button-text"></button>
+                      <!-- <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button> -->
                       <button  pButton pRipple type="button" icon="pi pi-trash" (click)="showDialog1(product)" class="p-button-rounded p-button-text"></button>
                     </td>
               </tr>
@@ -130,6 +130,10 @@
           <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small>
       </div>
       <div class="field col">
+        <label for="price">Price:</label>
+        <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+      </div>
+      <div class="field col">
           <label for="description">Description</label>
           <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3" cols="20"></textarea>
       </div>
@@ -159,10 +163,7 @@
       </div> -->
 
       <!-- <div class="formgrid grid"> -->
-          <div class="field col">
-              <label for="price">Price:</label>
-              <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-            </div>
+
         <!-- <div class="field col">
               <label for="quantity">Quantity</label>
               <p-inputNumber id="quantity" [(ngModel)]="product.price"></p-inputNumber>
@@ -181,7 +182,7 @@
 </div>
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="productDialog=false"></button>
-      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveProduct()"></button>
   </ng-template>
 </p-dialog>
 

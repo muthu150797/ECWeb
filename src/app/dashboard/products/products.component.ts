@@ -166,7 +166,7 @@ export class ProductsComponent implements OnInit {
     //this.product.productBrandId=this.selectedBrandId;
     console.log('setBrandId', this.product.productBrandId);
   }
-  AddProduct() {
+  InitializeProduct() {
     let prod = {
       id: 0,
       name: '',
@@ -179,10 +179,29 @@ export class ProductsComponent implements OnInit {
       productBrandId: this.selectedBrandId,
     };
     this.product = prod;
-    console.log('adding product', this.product);
+    console.log('Initialize product', this.product);
     this.productDialog = true;
   }
-  saveProduct() {
+  EditProduct(product:any){
+    this.selectedBrandId= product.productBrandId;
+    this.selectedProductId=product.productTypeId;
+    let prod = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      pictureUrl: product.pictureUrl,
+      price: product.price,
+      // productType: '',
+      // productBrand: '',
+      productTypeId: this.selectedProductId,
+      productBrandId:  this.selectedBrandId,
+    };
+
+    this.product = prod;
+    console.log('Editing product', this.product);
+    this.productDialog = true;
+  }
+  SaveProduct() {
     if(this.product.pictureUrl=='')
     {
       this.toastr.warning("Please Upload Product File");
