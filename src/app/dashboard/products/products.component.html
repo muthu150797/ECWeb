@@ -110,6 +110,7 @@
 <!-- implement product add popup -->
 <p-dialog [(visible)]="productDialog" [style]="{width: '600px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
+
     <div class="formgrid grid">
       <div class="field col">
         <label>Brand:</label>
@@ -168,11 +169,22 @@
           </div> -->
       <!-- </div> -->
   </ng-template>
+  <div class="field col">
+    <p-fileUpload name="files[]" url="" (uploadHandler)="onUpload($event)" customUpload="true"
+            [multiple]="false" method="POST" accept="image/*" [maxFileSize]="1000000">
+            <!-- <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template> -->
+    </p-fileUpload>
+</div>
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="productDialog=false"></button>
       <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
   </ng-template>
 </p-dialog>
+
 <!-- <p-dialog [maximizable]="false" header="{{header}}" [(visible)]="popup" [draggable]="true" [resizable]="true">
   <div class="sizes">
     <input [readonly]="false" [(ngModel)]="productTypeName" pInputText type="text"  placeholder="Enter Product Type" />

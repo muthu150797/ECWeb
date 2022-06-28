@@ -34,7 +34,7 @@ import { DeliveryMethodsComponent } from './dashboard/delivery-methods/delivery-
 import { ProductsComponent } from './dashboard/products/products.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputNumberModule} from 'primeng/inputnumber';
-
+import {FileUploadModule} from 'primeng/fileupload';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +67,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
     HomeModule,
     InputTextModule,
     NgxSpinnerModule,
+    FileUploadModule,
     BsDropdownModule.forRoot()
   ],
   providers: [CustomerService,ProductService,

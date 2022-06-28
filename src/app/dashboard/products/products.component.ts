@@ -34,6 +34,8 @@ export class ProductsComponent implements OnInit {
   brands: IBrand[];
   selectedProductId: number;
   productTypes: IProductType[];
+  files: any;
+  uploadedFiles: any[] = [];
   constructor(
     private toastr: ToastrService,
     private productService: ProductService
@@ -148,6 +150,21 @@ export class ProductsComponent implements OnInit {
     this.header = 'Delete Product';
     this.contentName = 'Are you sure want to delete the ' + content.name + '?';
     this.contentId = content.id;
+  }
+  onUpload(event) {
+    console.log("event",event)
+    let formData=new FormData();
+     for (let file of event.files) {
+      formData.append("files",file)
+      this.uploadedFiles.push(file);
+    }
+    console.log("upload file",this.uploadedFiles);
+    this.productService.upload(formData).subscribe((res)=>{
+     console.log(res);
+    })
+    // for (let file of event.files) {
+    //   this.uploadedFiles.push(file);
+    // }
   }
   AddProduct() {
     let prod = {

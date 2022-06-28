@@ -159,4 +159,7 @@ export class ProductService {
     DeleteProduct(productId:any) {
       return this.http.get<any>(this.baseUrl + 'products/deleteProduct?id='+productId);
     }
+    upload(formdata:any) {
+      return this.http.post<any>(this.baseUrl + 'products/upload',formdata);
+    }
 }
