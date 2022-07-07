@@ -103,7 +103,7 @@
         </ng-template>
 </p-dialog>
 <!-- implement product add popup -->
-<p-dialog [(visible)]="productDialog" [style]="{width: '600px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="productDialog" [style]="{width: '600px'}" header="{{header}} Product" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
 
     <div class="formgrid grid">

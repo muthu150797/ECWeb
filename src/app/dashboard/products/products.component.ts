@@ -169,6 +169,7 @@ export class ProductsComponent implements OnInit {
     console.log('setBrandId', this.product.productBrandId);
   }
   InitializeProduct() {
+    this.header='Add';
     let prod = {
       id: 0,
       name: '',
@@ -185,6 +186,7 @@ export class ProductsComponent implements OnInit {
     this.productDialog = true;
   }
   EditProduct(product:any){
+    this.header='Edit';
     this.selectedBrandId= product.productBrandId;
     this.selectedProductId=product.productTypeId;
     let prod = {
