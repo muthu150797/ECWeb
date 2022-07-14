@@ -35,6 +35,7 @@ import { ProductsComponent } from './dashboard/products/products.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {FileUploadModule} from 'primeng/fileupload';
+import { VendorsComponent } from './dashboard/vendors/vendors.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     BrandsComponent,
     ProductTypesComponent,
     DeliveryMethodsComponent,
-    ProductsComponent
+    ProductsComponent,
+    VendorsComponent
   ],
   imports: [
     BrowserModule,
