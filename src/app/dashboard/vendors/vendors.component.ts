@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VendorService } from '../vendor.service';
 
 @Component({
@@ -22,7 +23,12 @@ export class VendorsComponent implements OnInit {
   vendorList: any;
   id = 0;
   response: any;
-  constructor(private vendorService: VendorService) {}
+  vendor: any;
+  vendorForm: FormGroup;
+  constructor(
+    private formBuilder: FormBuilder,
+    private vendorService: VendorService
+  ) {}
 
   ngOnInit(): void {
     this.cols = [
@@ -30,9 +36,30 @@ export class VendorsComponent implements OnInit {
       { field: 'name', header: 'Name' },
       { field: 'email', header: 'Email' },
       { field: 'mobile', header: 'Mobile' },
-     { field: 'accountNumber', header: 'Account Number' }
+      { field: 'accountNumber', header: 'Account Number' },
     ];
     this.GetAllVendors();
+    this.initializeForm();
+  }
+  get f() {
+    return this.vendorForm.controls;
+  }
+  private initializeForm() {
+    if (!this.vendorForm) {
+      this.vendorForm = this.buildForm();
+    }
+  }
+  buildForm(): FormGroup {
+    const group = this.formBuilder.group({
+      name: ['fghj',Validators.required],
+      email: ['dsj@gmail.com', [Validators.required, Validators.email]],
+      mobile: ['34567', [Validators.required]],
+    });
+
+    return group;
+  }
+  onInputKeyPress(){
+  console.log(this.vendorForm);
   }
   next() {
     this.first = this.first + this.rows;
@@ -84,9 +111,19 @@ export class VendorsComponent implements OnInit {
     this.vendorList[index] = this.clonedProducts[brand.id];
     delete this.clonedProducts[brand.id];
   }
+  showDialog2() {
+    this.popup = true;
+    this.header = 'Add';
+    this.vendor = {
+      name: 'dfd',
+      email: 'dfs',
+      mobile: 'sdfdsf',
+    };
+  }
+  AddDeliveryMethod() {}
   GetAllVendors() {
     this.vendorService.GetAllVendors().subscribe((res) => {
-      this.vendorList=res;
+      this.vendorList = res;
       console.log('All Vendors', res);
     });
   }

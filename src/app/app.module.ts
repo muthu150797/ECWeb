@@ -17,7 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrandsComponent } from './dashboard/brands/brands.component';
 import { ProductTypesComponent } from './dashboard/product-types/product-types.component';
 import {TableModule} from 'primeng/table';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomerService } from './dashboard/customerService';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
@@ -54,6 +54,7 @@ import { VendorsComponent } from './dashboard/vendors/vendors.component';
     CoreModule,
     TableModule,
     CalendarModule,
+    ReactiveFormsModule,
 		SliderModule,
 		DialogModule,
 		MultiSelectModule,
@@ -67,6 +68,7 @@ import { VendorsComponent } from './dashboard/vendors/vendors.component';
     ProgressBarModule,
     FormsModule,
     HomeModule,
+
     InputTextModule,
     NgxSpinnerModule,
     FileUploadModule,

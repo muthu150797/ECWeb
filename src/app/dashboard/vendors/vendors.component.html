@@ -90,21 +90,48 @@
         <p-button (click)="DeleteDeliveryMethod(contentId)" label="Yes" styleClass="p-button-text"></p-button>
         </ng-template>
 </p-dialog>
+<!-- add or update vendor -->
+<p-dialog [(visible)]="popup" [style]="{width: '600px'}" header="{{header}} Vendor" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
 
-<!-- <p-dialog [maximizable]="false" header="{{header}}" [(visible)]="popup" [draggable]="true" [resizable]="true">
-  <div class="sizes">
-    <input [readonly]="false" [(ngModel)]="shortName" pInputText type="text"  placeholder="Enter Short Name" />
-  </div> <br/>
-  <div class="sizes">
-    <input [readonly]="false" [(ngModel)]="deliveryTime" pInputText type="text"  placeholder="Enter Delivery Time" />
-  </div> <br/>
-  <div class="sizes">
-    <p-inputNumber id="price" [(ngModel)]="price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-  </div>
-  <br/>
-  <div class="sizes">
-    <button pButton pRipple label="Save" (click)="AddDeliveryMethod()"
-    class="p-button-raised">
-  </button>
-  </div>
-  </p-dialog> -->
+    <div class="formgrid grid">
+      <!-- <div class="field col">
+        <label>Brand:</label>
+        <p-dropdown [(ngModel)]="selectedBrandId"  [options]="brands" optionLabel="name" optionValue="id">
+        </p-dropdown>
+      </div> -->
+     <!-- <div class="field col">
+      <label>Product Type:</label>
+      <p-dropdown [(ngModel)]="selectedProductId" [options]="productTypes" optionLabel="name" optionValue="id">
+      </p-dropdown>
+     </div> -->
+    </div>
+    <form [formGroup]="vendorForm">
+      <div class="field col">
+        <label for="name">Name:</label>
+        <input formControlName="name" (keypress)="onInputKeyPress()" type="text" pInputText id="name"  required autofocus />
+        <small style="color:red" *ngIf="!f.name.valid">The name is required</small>
+        <small class="p-error" *ngIf="!vendor.name">Name is required.</small>
+    </div>
+    <div class="field col">
+      <label for="price">Email:</label>
+      <input formControlName="email" id="email" pInputText  required autofocus/>
+      <small style="color:red" *ngIf="!f.email.valid">Please enter correct email</small>
+      <small class="p-error" *ngIf="!vendor.email">Email is required.</small>
+    </div>
+    <div class="field col">
+        <label for="description">Mobile:</label>
+        <input formControlName="mobile" id="mobile" pInputText  required autofocus />
+        <small style="color:red" *ngIf="!f.mobile.valid">The mobile is required</small>
+        <small class="p-error" *ngIf="!vendor.mobile">Mobile is required.</small>
+    </div>
+     </form>
+       <!-- <img [src]="picUrl + product.pictureUrl" [alt]="product.name" class="product-image" *ngIf="product.pictureUrl!=''"> -->
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="popup=false"></button>
+      <button [disabled]="!vendorForm.valid" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveVendor()"></button>
+  </ng-template>
+  </p-dialog>
