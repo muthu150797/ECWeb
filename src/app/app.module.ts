@@ -35,6 +35,8 @@ import { ProductsComponent } from './dashboard/products/products.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {FileUploadModule} from 'primeng/fileupload';
+import {InputMaskModule} from 'primeng/inputmask';
+
 import { VendorsComponent } from './dashboard/vendors/vendors.component';
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { VendorsComponent } from './dashboard/vendors/vendors.component';
 		DropdownModule,
     InputTextareaModule,
 		ButtonModule,
+    InputMaskModule,
     InputNumberModule,
 		ToastModule,
     InputTextModule,

@@ -51,9 +51,9 @@ export class VendorsComponent implements OnInit {
   }
   buildForm(): FormGroup {
     const group = this.formBuilder.group({
-      name: ['fghj',Validators.required],
-      email: ['dsj@gmail.com', [Validators.required, Validators.email]],
-      mobile: ['34567', [Validators.required]],
+      name: ['',Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: ['', [Validators.required,Validators.min(10)]],
     });
 
     return group;

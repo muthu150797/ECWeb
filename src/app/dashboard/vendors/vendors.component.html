@@ -121,7 +121,10 @@
     </div>
     <div class="field col">
         <label for="description">Mobile:</label>
-        <input formControlName="mobile" id="mobile" pInputText  required autofocus />
+        <p-inputMask  placeholder="9999999999" formControlName="mobile" mask="9999999999"></p-inputMask>
+        <!-- <p-inputNumber formControlName="mobile" inputId="minmax" mode="decimal" [min]="0" [max]="10">
+        </p-inputNumber> -->
+        <!-- <input formControlName="mobile" id="mobile" pInputText  required autofocus /> -->
         <small style="color:red" *ngIf="!f.mobile.valid">The mobile is required</small>
         <small class="p-error" *ngIf="!vendor.mobile">Mobile is required.</small>
     </div>
