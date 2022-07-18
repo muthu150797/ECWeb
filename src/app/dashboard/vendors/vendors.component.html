@@ -73,9 +73,9 @@
                             </ng-template>
                         </p-cellEditor></td>
                   <td style="text-align:center">
-                      <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(method)" class="p-button-rounded p-button-text"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(method)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(method, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                      <button  pButton pRipple type="button" icon="pi pi-pencil" (click)="onRowEditInit(vendor)" class="p-button-rounded p-button-text"></button>
+                      <!-- <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(method)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(method, ri)" class="p-button-rounded p-button-text p-button-danger"></button> -->
                       <button  pButton pRipple type="button" icon="pi pi-trash" (click)="showDialog1(method)" class="p-button-rounded p-button-text"></button>
                     </td>
               </tr>
@@ -110,14 +110,12 @@
       <div class="field col">
         <label for="name">Name:</label>
         <input formControlName="name" (keypress)="onInputKeyPress()" type="text" pInputText id="name"  required autofocus />
-        <small style="color:red" *ngIf="!f.name.valid">The name is required</small>
-        <small class="p-error" *ngIf="!vendor.name">Name is required.</small>
+        <small style="color:red" *ngIf="!f.name.valid">The Name is required</small>
     </div>
     <div class="field col">
       <label for="price">Email:</label>
       <input formControlName="email" id="email" pInputText  required autofocus/>
-      <small style="color:red" *ngIf="!f.email.valid">Please enter correct email</small>
-      <small class="p-error" *ngIf="!vendor.email">Email is required.</small>
+      <small style="color:red" *ngIf="!f.email.valid">Please enter correct Email</small>
     </div>
     <div class="field col">
         <label for="description">Mobile:</label>
@@ -126,8 +124,46 @@
         </p-inputNumber> -->
         <!-- <input formControlName="mobile" id="mobile" pInputText  required autofocus /> -->
         <small style="color:red" *ngIf="!f.mobile.valid">The mobile is required</small>
-        <small class="p-error" *ngIf="!vendor.mobile">Mobile is required.</small>
     </div>
+    <div class="field col">
+        <label >Account Number:</label>
+        <input formControlName="accountNumber" id="accountNumber" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.accountNumber.valid">Please enter correct Account Number</small>
+      </div> <div class="field col">
+        <label >IFSC:</label>
+        <input formControlName="ifsc" id="ifsc" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.ifsc.valid">Please enter correct IFSC</small>
+      </div>
+      <div class="field col">
+        <label >Branch:</label>
+        <input formControlName="branch" id="branch" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.branch.valid">Please enter correct Branch</small>
+      </div>
+      <div class="field col">
+        <label >First Name:</label>
+        <input formControlName="firstName" id="firstName" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.firstName.valid">Please enter correct First Name</small>
+      </div> <div class="field col">
+        <label >Last Name:</label>
+        <input formControlName="lastName" id="lastName" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.lastName.valid">Please enter correct Last Name</small>
+      </div> <div class="field col">
+        <label >State:</label>
+        <input formControlName="state" id="state" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.state.valid">Please enter correct State</small>
+      </div> <div class="field col">
+        <label >Street:</label>
+        <input formControlName="street" id="street" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.street.valid">Please enter correct Street</small>
+      </div> <div class="field col">
+        <label >City:</label>
+        <input formControlName="city" id="branch" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.city.valid">Please enter correct City</small>
+      </div> <div class="field col">
+        <label >Zip Code:</label>
+        <input formControlName="zipCode" id="zipCode" pInputText  required autofocus/>
+        <small style="color:red" *ngIf="!f.zipCode.valid">Please enter correct Zip Code</small>
+      </div>
      </form>
        <!-- <img [src]="picUrl + product.pictureUrl" [alt]="product.name" class="product-image" *ngIf="product.pictureUrl!=''"> -->
 

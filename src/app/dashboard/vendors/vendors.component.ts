@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { VendorService } from '../vendor.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class VendorsComponent implements OnInit {
   vendor: any;
   vendorForm: FormGroup;
   constructor(
+    private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private vendorService: VendorService
   ) {}
@@ -51,15 +53,25 @@ export class VendorsComponent implements OnInit {
   }
   buildForm(): FormGroup {
     const group = this.formBuilder.group({
-      name: ['',Validators.required],
+      id: [0],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required,Validators.min(10)]],
+      mobile: ['', [Validators.required, Validators.min(10)]],
+      accountNumber: ['', [Validators.required]],
+      ifsc: ['', [Validators.required]],
+      branch: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      zipCode: ['', [Validators.required]],
     });
 
     return group;
   }
-  onInputKeyPress(){
-  console.log(this.vendorForm);
+  onInputKeyPress() {
+    console.log(this.vendorForm);
   }
   next() {
     this.first = this.first + this.rows;
@@ -83,42 +95,49 @@ export class VendorsComponent implements OnInit {
     return this.vendorList ? this.first === 0 : true;
   }
   onRowEditInit(vendorList: any) {
-    this.clonedProducts[vendorList.id] = { ...vendorList };
+    // this.clonedProducts[vendorList.id] = { ...vendorList };
+    console.log('editing vendor', vendorList);
+    this.vendorForm.patchValue({
+      id: vendorList.id,
+      name: vendorList.name,
+      email: vendorList.email,
+      mobile: vendorList.mobile,
+      accountNumber: vendorList.accountNumber,
+      ifsc: vendorList.ifsc,
+      branch: vendorList.branch,
+      firstName: vendorList.vendorAddress.firstName,
+      lastName: vendorList.vendorAddress.lastName,
+      state: vendorList.vendorAddress.state,
+      street: vendorList.vendorAddress.street,
+      city: vendorList.vendorAddress.city,
+      zipCode: vendorList.vendorAddress.zipCode,
+    });
+    this.popup = true;
+  }
+  SaveVendor() {
+    this.vendorService.AddOrUpdateVendor(this.vendorForm).subscribe((res) => {
+      this.response = res;
+      console.log('add or vendor', res);
+      if (this.response.statusCode == 200) {
+        this.GetAllVendors();
+        this.toastr.success(this.response.message);
+      }
+       else this.toastr.error(this.response.message);
+    });
+    this.popup = false;
   }
 
-  onRowEditSave(vendorList: any) {
-    // if (deliveryMethod.id > 0) {
-    //   delete this.clonedProducts[deliveryMethod.id];
-    //   this.productService.AddOrUpdateDeliveryMethod(deliveryMethod).subscribe(
-    //     (res: ResponseModel) => {
-    //       console.log('response from updating type', res);
-    //       if (res.statusCode == 200) {
-    //         this.toastr.success(res.message);
-    //         this.GetAllDeliveryMethods();
-    //       } else {
-    //         this.toastr.error(res.message);
-    //       }
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
-    // } else {
-    //   this.toastr.error("Not Found");
-    // }
-  }
-  onRowEditCancel(brand: any, index: number) {
-    this.vendorList[index] = this.clonedProducts[brand.id];
-    delete this.clonedProducts[brand.id];
-  }
   showDialog2() {
+    this.vendorForm.reset();
+    this.vendorForm.patchValue({ id: 0 });
     this.popup = true;
+    //this.vendorForm=null;
     this.header = 'Add';
-    this.vendor = {
-      name: 'dfd',
-      email: 'dfs',
-      mobile: 'sdfdsf',
-    };
+    // this.vendor = {
+    //   name: 'dfd',
+    //   email: 'dfs',
+    //   mobile: 'sdfdsf',
+    // };
   }
   AddDeliveryMethod() {}
   GetAllVendors() {
